@@ -12,17 +12,15 @@ import java.util.List;
 public class TeamHolder {
 
     private static TeamHolder instance = null;
-    private static List<Team> nflTeamList = null;
-
-    private TeamHolder(){}
+    private List<Team> nflTeamList = null;
 
     private TeamHolder(JSONObject json){
+        nflTeamList = new ArrayList<Team>();
         loadNFLTeams(json);
     }
 
     public static TeamHolder getInstance(JSONObject json){
         if(instance == null){
-            nflTeamList = new ArrayList<Team>();
             instance = new TeamHolder(json);
         }
         return instance;

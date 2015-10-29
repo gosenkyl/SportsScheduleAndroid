@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="font_thin">
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+
 </resources>

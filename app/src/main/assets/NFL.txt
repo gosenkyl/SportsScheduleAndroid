@@ -7,7 +7,7 @@
     "secondaryColor": "FFFFFF",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/ari.png&h=150&w=150",
+    "logoURL": "ari",
     "teamAbbr": "ARI",
     "schedule": [
       {
@@ -122,7 +122,7 @@
     "secondaryColor": "A71930",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/atl.png&h=150&w=150",
+    "logoURL": "atl",
     "teamAbbr": "ATL",
     "schedule": [
       {
@@ -237,7 +237,7 @@
     "secondaryColor": "000000",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/bal.png&h=150&w=150",
+    "logoURL": "bal",
     "teamAbbr": "BAL",
     "schedule": [
       {
@@ -352,7 +352,7 @@
     "secondaryColor": "C60C30",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/buf.png&h=150&w=150",
+    "logoURL": "buf",
     "teamAbbr": "BUF",
     "schedule": [
       {
@@ -467,7 +467,7 @@
     "secondaryColor": "000000",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/car.png&h=150&w=150",
+    "logoURL": "car",
     "teamAbbr": "CAR",
     "schedule": [
       {
@@ -582,7 +582,7 @@
     "secondaryColor": "C83803",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/chi.png&h=150&w=150",
+    "logoURL": "chi",
     "teamAbbr": "CHI",
     "schedule": [
       {
@@ -697,7 +697,7 @@
     "secondaryColor": "FB4F14",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/cin.png&h=150&w=150",
+    "logoURL": "cin",
     "teamAbbr": "CIN",
     "schedule": [
       {
@@ -812,7 +812,7 @@
     "secondaryColor": "311D00",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/cle.png&h=150&w=150",
+    "logoURL": "cle",
     "teamAbbr": "CLE",
     "schedule": [
       {
@@ -927,7 +927,7 @@
     "secondaryColor": "B0B7BC",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/dal.png&h=150&w=150",
+    "logoURL": "dal",
     "teamAbbr": "DAL",
     "schedule": [
       {
@@ -1042,7 +1042,7 @@
     "secondaryColor": "002244",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/den.png&h=150&w=150",
+    "logoURL": "den",
     "teamAbbr": "DEN",
     "schedule": [
       {
@@ -1157,7 +1157,7 @@
     "secondaryColor": "B0B7BC",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/det.png&h=150&w=150",
+    "logoURL": "det",
     "teamAbbr": "DET",
     "schedule": [
       {
@@ -1272,7 +1272,7 @@
     "secondaryColor": "FFB612",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/gb.png&h=150&w=150",
+    "logoURL": "gb",
     "teamAbbr": "GB",
     "schedule": [
       {
@@ -1387,7 +1387,7 @@
     "secondaryColor": "A71930",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/hou.png&h=150&w=150",
+    "logoURL": "hou",
     "teamAbbr": "HOU",
     "schedule": [
       {
@@ -1502,7 +1502,7 @@
     "secondaryColor": "FFFFFF",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/ind.png&h=150&w=150",
+    "logoURL": "ind",
     "teamAbbr": "IND",
     "schedule": [
       {
@@ -1617,7 +1617,7 @@
     "secondaryColor": "006778",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/jax.png&h=150&w=150",
+    "logoURL": "jax",
     "teamAbbr": "JAC",
     "schedule": [
       {
@@ -1732,7 +1732,7 @@
     "secondaryColor": "FFB612",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/kc.png&h=150&w=150",
+    "logoURL": "kc",
     "teamAbbr": "KC",
     "schedule": [
       {
@@ -1847,7 +1847,7 @@
     "secondaryColor": "F58220",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/mia.png&h=150&w=150",
+    "logoURL": "mia",
     "teamAbbr": "MIA",
     "schedule": [
       {
@@ -1962,7 +1962,7 @@
     "secondaryColor": "FFC62F",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/min.png&h=150&w=150",
+    "logoURL": "min",
     "teamAbbr": "MIN",
     "schedule": [
       {
@@ -2077,7 +2077,7 @@
     "secondaryColor": "C60C30",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/ne.png&h=150&w=150",
+    "logoURL": "ne",
     "teamAbbr": "NE",
     "schedule": [
       {
@@ -2192,7 +2192,7 @@
     "secondaryColor": "000000",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/no.png&h=150&w=150",
+    "logoURL": "no",
     "teamAbbr": "NO",
     "schedule": [
       {
@@ -2307,7 +2307,7 @@
     "secondaryColor": "A71930",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/nyg.png&h=150&w=150",
+    "logoURL": "nyg",
     "teamAbbr": "NYG",
     "schedule": [
       {
@@ -2422,7 +2422,7 @@
     "secondaryColor": "FFFFFF",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/nyj.png&h=150&w=150",
+    "logoURL": "nyj",
     "teamAbbr": "NYJ",
     "schedule": [
       {
@@ -2537,7 +2537,7 @@
     "secondaryColor": "000000",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/oak.png&h=150&w=150",
+    "logoURL": "oak",
     "teamAbbr": "OAK",
     "schedule": [
       {
@@ -2652,7 +2652,7 @@
     "secondaryColor": "A5ACAF",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/phi.png&h=150&w=150",
+    "logoURL": "phi",
     "teamAbbr": "PHI",
     "schedule": [
       {
@@ -2767,7 +2767,7 @@
     "secondaryColor": "FFB612",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/pit.png&h=150&w=150",
+    "logoURL": "pit",
     "teamAbbr": "PIT",
     "schedule": [
       {
@@ -2882,7 +2882,7 @@
     "secondaryColor": "0073CF",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/sd.png&h=150&w=150",
+    "logoURL": "sd",
     "teamAbbr": "SD",
     "schedule": [
       {
@@ -2997,7 +2997,7 @@
     "secondaryColor": "B3995D",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/sf.png&h=150&w=150",
+    "logoURL": "sf",
     "teamAbbr": "SF",
     "schedule": [
       {
@@ -3112,7 +3112,7 @@
     "secondaryColor": "69BE28",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/sea.png&h=150&w=150",
+    "logoURL": "sea",
     "teamAbbr": "SEA",
     "schedule": [
       {
@@ -3227,7 +3227,7 @@
     "secondaryColor": "B3995D",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/stl.png&h=150&w=150",
+    "logoURL": "stl",
     "teamAbbr": "STL",
     "schedule": [
       {
@@ -3342,7 +3342,7 @@
     "secondaryColor": "34302B",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/tb.png&h=150&w=150",
+    "logoURL": "tb",
     "teamAbbr": "TB",
     "schedule": [
       {
@@ -3457,7 +3457,7 @@
     "secondaryColor": "4B92DB",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/ten.png&h=150&w=150",
+    "logoURL": "ten",
     "teamAbbr": "TEN",
     "schedule": [
       {
@@ -3572,7 +3572,7 @@
     "secondaryColor": "FFB612",
     "lonLocation": null,
     "latLocation": null,
-    "logoURL": "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/wsh.png&h=150&w=150",
+    "logoURL": "wsh",
     "teamAbbr": "WAS",
     "schedule": [
       {
