@@ -7,13 +7,17 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,13 +31,24 @@ public class TeamsActivity extends AppCompatActivity {
 
     private static final int COLUMNS = 3;
 
+    /* Action Bar */
+    /* http://www.androidhive.info/2013/11/android-working-with-action-bar/ */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
 
+        // Initialize TeamHolder singleton
         TeamHolder teamHolder = TeamHolder.getInstance(null);
 
+        // Load NFL teams by default
+        loadNFLTeams(teamHolder);
+    }
+
+
+    private void loadNFLTeams(TeamHolder teamHolder){
+        // Table of NFL teams
         TableRow row = null;
         TableLayout layout = (TableLayout) findViewById(R.id.team_list);
 
@@ -65,6 +80,7 @@ public class TeamsActivity extends AppCompatActivity {
             Bitmap circleBitmap = Bitmap.createBitmap(bMapScaled.getWidth(), bMapScaled.getHeight(), Bitmap.Config.ARGB_8888);
 
             BitmapShader shader = new BitmapShader (bMapScaled,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+
             Paint paint = new Paint();
             paint.setShader(shader);
             paint.setAntiAlias(true);
@@ -76,6 +92,7 @@ public class TeamsActivity extends AppCompatActivity {
             ImageView circ = new ImageView(this);
             circ.setLayoutParams(params);
             circ.setImageBitmap(circleBitmap);
+
 
             linear.addView(circ);
 
@@ -93,7 +110,7 @@ public class TeamsActivity extends AppCompatActivity {
 
             text.setTextColor(getResources().getColor(R.color.shade4));
             text.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-            text.setTextAppearance(this, R.style.font_thin);
+            text.setTextAppearance(this, R.style.font_thin_bold);
             text.setGravity(Gravity.CENTER);
 
             linear.addView(text);
@@ -113,6 +130,5 @@ public class TeamsActivity extends AppCompatActivity {
 
             row.addView(linear);
         }
-
     }
 }

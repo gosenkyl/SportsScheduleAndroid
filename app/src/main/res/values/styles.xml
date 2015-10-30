@@ -8,8 +8,37 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--
+        android:fontFamily="sans-serif"           // roboto regular
+        android:fontFamily="sans-serif-light"     // roboto light
+        android:fontFamily="sans-serif-condensed" // roboto condensed
+        android:fontFamily="sans-serif-thin"      // roboto thin (android 4.2)
+        android:fontFamily="sans-serif-medium"    // roboto medium (android 5.0)
+    -->
+
+    <style name="font_normal">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
     <style name="font_thin">
         <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+
+    <style name="font_thin_bold">
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font_condensed">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="font_light">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="font_medium">
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
 </resources>
