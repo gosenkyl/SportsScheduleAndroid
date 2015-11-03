@@ -34,18 +34,7 @@ public class SplashActivity extends Activity {
         @Override
         protected String doInBackground(String... params) {
 
-            String fileName = "NFL.txt";
-            InputStream is = null;
-            JSONObject json = null;
-            try{
-                is = getAssets().open(fileName);
-
-                json = getJSONFromAssets(is);
-            } catch(Exception e){
-                e.printStackTrace();
-            }
-
-            TeamHolder teamHolder = TeamHolder.getInstance(json);
+            TeamHolder teamHolder = TeamHolder.getInstance();
 
             return null;
         }
@@ -63,23 +52,6 @@ public class SplashActivity extends Activity {
         @Override
         protected void onProgressUpdate(Void... values) {
         }
-    }
-
-    private JSONObject getJSONFromAssets(InputStream is) throws Exception {
-
-        StringBuffer sb = new StringBuffer();
-        BufferedReader br = null;
-
-        br = new BufferedReader(new InputStreamReader(is));
-
-        String temp;
-        while ((temp = br.readLine()) != null) {
-            sb.append(temp);
-        }
-
-        br.close();
-
-        return new JSONObject(sb.toString());
     }
 
 }

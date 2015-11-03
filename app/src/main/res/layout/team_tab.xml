@@ -7,11 +7,17 @@
     android:background="@color/white"
     tools:context="com.sportsschedule.gosenk.sportsscheduleandroid.TeamsActivity">
 
-    <TableLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/team_list">
+        android:layout_height="fill_parent">
 
-    </TableLayout>
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/team_list">
+
+        </TableLayout>
+
+    </ScrollView>
 
 </LinearLayout>

@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -31,13 +33,13 @@ public class NFLFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.team_tab, container, false);
 
-        TeamHolder teamHolder = TeamHolder.getInstance(null);
-        loadNFLTeams(view, teamHolder);
+        TeamHolder teamHolder = TeamHolder.getInstance();
+        loadNFLTeams(inflater, view, container, teamHolder);
 
         return view;
     }
 
-    private void loadNFLTeams(View view, TeamHolder teamHolder){
+    private void loadNFLTeams(LayoutInflater inflater, View view, ViewGroup container, TeamHolder teamHolder){
         // Table of NFL teams
         TableRow row = null;
         TableLayout layout = (TableLayout) view.findViewById(R.id.team_list);
@@ -83,15 +85,19 @@ public class NFLFragment extends Fragment {
             circ.setLayoutParams(params);
             circ.setImageBitmap(circleBitmap);
 
+            ScheduleOnClick clickListener = new ScheduleOnClick(inflater, view, container);
+
+            circ.setOnClickListener(clickListener);
 
             linear.addView(circ);
 
+
             // NFL Team Image
-            ImageView img = new ImageView(view.getContext());
+            /*ImageView img = new ImageView(view.getContext());
             img.setLayoutParams(params);
             img.setImageBitmap(bMapScaled);
 
-            //linear.addView(img);
+            linear.addView(img);*/
 
             // NFL Team Name
             TextView text = new TextView(view.getContext());

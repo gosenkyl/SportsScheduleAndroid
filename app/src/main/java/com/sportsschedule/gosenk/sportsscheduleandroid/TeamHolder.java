@@ -1,10 +1,12 @@
 package com.sportsschedule.gosenk.sportsscheduleandroid;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,14 +16,14 @@ public class TeamHolder {
     private static TeamHolder instance = null;
     private List<Team> nflTeamList = null;
 
-    private TeamHolder(JSONObject json){
+    private TeamHolder(){
         nflTeamList = new ArrayList<Team>();
-        loadNFLTeams(json);
+        loadNFLTeams();
     }
 
-    public static TeamHolder getInstance(JSONObject json){
+    public static TeamHolder getInstance(){
         if(instance == null){
-            instance = new TeamHolder(json);
+            instance = new TeamHolder();
         }
         return instance;
     }
@@ -30,32 +32,49 @@ public class TeamHolder {
         return nflTeamList;
     }
 
-    private void loadNFLTeams(JSONObject json){
+    private void loadNFLTeams(){
 
         try {
 
-            Iterator<String> jsonIt = json.keys();
-            while(jsonIt.hasNext()){
-                String key = jsonIt.next();
-                JSONObject obj = json.getJSONObject(key);
+            URL url = new URL("https://sports-schedule.herokuapp.com/nfl.php");
+            URLConnection conn = url.openConnection();
+            if(conn != null) {
+                InputStreamReader in = new InputStreamReader(conn.getInputStream());
+                BufferedReader br = new BufferedReader(in);
 
-                Team team = new Team();
+                int cp;
+                StringBuilder sb = new StringBuilder();
+                while ((cp = br.read()) != -1) {
+                    sb.append((char) cp);
+                }
+                br.close();
+                in.close();
 
-                team.setTeamId(obj.getInt("teamId"));
-                team.setCity(obj.getString("city"));
-                team.setMascot(obj.getString("mascot"));
-                team.setPrimaryColor(obj.getString("primaryColor"));
-                team.setSecondaryColor(obj.getString("secondaryColor"));
+                String jsonStr = sb.toString();
+                JSONObject json = new JSONObject(jsonStr);
 
-                //team.setLonLocation(obj.getDouble("lonLocation"));
-                //team.setLatLocation(obj.getDouble("latLocation"));
+                Iterator<String> jsonIt = json.keys();
+                while (jsonIt.hasNext()) {
+                    String key = jsonIt.next();
+                    JSONObject obj = json.getJSONObject(key);
 
-                team.setLogoURL(obj.getString("logoURL"));
-                team.setTeamAbbr(obj.getString("teamAbbr"));
+                    Team team = new Team();
 
-                nflTeamList.add(team);
+                    team.setTeamId(obj.getInt("teamId"));
+                    team.setCity(obj.getString("city"));
+                    team.setMascot(obj.getString("mascot"));
+                    team.setPrimaryColor(obj.getString("primaryColor"));
+                    team.setSecondaryColor(obj.getString("secondaryColor"));
+
+                    //team.setLonLocation(obj.getDouble("lonLocation"));
+                    //team.setLatLocation(obj.getDouble("latLocation"));
+
+                    team.setLogoURL(obj.getString("logoURL"));
+                    team.setTeamAbbr(obj.getString("teamAbbr"));
+
+                    nflTeamList.add(team);
+                }
             }
-
         } catch(Exception e){
             e.printStackTrace();;
         }
