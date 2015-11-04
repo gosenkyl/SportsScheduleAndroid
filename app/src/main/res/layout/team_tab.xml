@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.sportsschedule.gosenk.sportsscheduleandroid.TeamsActivity">
+    tools:context="com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamsActivity">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"

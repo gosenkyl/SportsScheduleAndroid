@@ -1,4 +1,4 @@
-package com.sportsschedule.gosenk.sportsscheduleandroid;
+package com.sportsschedule.gosenk.sportsscheduleandroid.teams.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,13 +13,18 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.sportsschedule.gosenk.sportsscheduleandroid.R;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.ScheduleOnClick;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHolder;
 
 /**
  * Created by GosenK on 10/30/2015.
@@ -28,16 +33,21 @@ public class NFLFragment extends Fragment {
 
     private static final int COLUMNS = 3;
 
+    private View nflView;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
 
-        View view = inflater.inflate(R.layout.team_tab, container, false);
+        if(nflView == null) {
+            View view = inflater.inflate(R.layout.team_tab, container, false);
+            TeamHolder teamHolder = TeamHolder.getInstance();
+            loadNFLTeams(inflater, view, teamHolder);
+            nflView = view;
+        }
 
-        TeamHolder teamHolder = TeamHolder.getInstance();
-        loadNFLTeams(inflater, view, teamHolder);
-
-        return view;
+        return nflView;
     }
+
 
     private void loadNFLTeams(LayoutInflater inflater, View view, TeamHolder teamHolder){
         // Table of NFL teams

@@ -1,4 +1,4 @@
-package com.sportsschedule.gosenk.sportsscheduleandroid;
+package com.sportsschedule.gosenk.sportsscheduleandroid.teams;
 
 /**
  * Created by Desktop on 10/28/2015.

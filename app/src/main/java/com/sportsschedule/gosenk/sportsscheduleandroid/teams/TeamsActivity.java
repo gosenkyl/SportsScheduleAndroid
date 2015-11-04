@@ -1,11 +1,14 @@
-package com.sportsschedule.gosenk.sportsscheduleandroid;
+package com.sportsschedule.gosenk.sportsscheduleandroid.teams;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.PopupWindow;
 
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.fragment.CollectionPagerAdapter;
+import com.sportsschedule.gosenk.sportsscheduleandroid.R;
 
 public class TeamsActivity extends AppCompatActivity {
 
@@ -26,5 +29,10 @@ public class TeamsActivity extends AppCompatActivity {
         tabs.setViewPager(pager);
 
     }
+
+    /*@Override
+    public void onBackPressed(){
+
+    }*/
 
 }

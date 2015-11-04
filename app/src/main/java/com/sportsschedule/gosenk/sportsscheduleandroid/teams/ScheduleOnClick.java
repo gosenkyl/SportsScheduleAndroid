@@ -1,4 +1,4 @@
-package com.sportsschedule.gosenk.sportsscheduleandroid;
+package com.sportsschedule.gosenk.sportsscheduleandroid.teams;
 
 
 import android.graphics.drawable.ColorDrawable;
@@ -6,9 +6,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.view.ViewGroup.LayoutParams;
+
+import com.sportsschedule.gosenk.sportsscheduleandroid.R;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Opponent;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +24,7 @@ public class ScheduleOnClick implements View.OnClickListener{
     private LayoutInflater inflater;
     private Team team;
     private View fragmentView;
+    private PopupWindow popup;
 
     public ScheduleOnClick(LayoutInflater inflater, View fragmentView, Team team){
         this.inflater = inflater;
@@ -31,7 +37,7 @@ public class ScheduleOnClick implements View.OnClickListener{
 
         View scheduleView = inflater.inflate(R.layout.schedule_popup, null);
 
-        PopupWindow pw = new PopupWindow(scheduleView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        final PopupWindow pw = new PopupWindow(scheduleView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
         ColorDrawable cd = new ColorDrawable();
         cd.setColor(fragmentView.getResources().getColor(R.color.white));
@@ -70,5 +76,15 @@ public class ScheduleOnClick implements View.OnClickListener{
 
         pw.showAtLocation(circleView, Gravity.CENTER, 0, 0);
 
+        ImageButton closeButton = (ImageButton) scheduleView.findViewById(R.id.close_button);
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pw.dismiss();
+            }
+        });
+
+        popup = pw;
     }
 }

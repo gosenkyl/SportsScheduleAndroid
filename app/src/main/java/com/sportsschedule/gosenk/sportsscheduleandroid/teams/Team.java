@@ -1,4 +1,4 @@
-package com.sportsschedule.gosenk.sportsscheduleandroid;
+package com.sportsschedule.gosenk.sportsscheduleandroid.teams;
 
 import java.util.ArrayList;
 import java.util.List;
