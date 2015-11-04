@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/schedule_item"
+    android:textColor="@color/shade4"
+    android:textSize="@dimen/schedule_popup_text_size"
+    android:textAppearance="@style/font_thin_bold"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+</TextView>

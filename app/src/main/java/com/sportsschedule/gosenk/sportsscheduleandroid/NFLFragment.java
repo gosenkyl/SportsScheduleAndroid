@@ -34,12 +34,12 @@ public class NFLFragment extends Fragment {
         View view = inflater.inflate(R.layout.team_tab, container, false);
 
         TeamHolder teamHolder = TeamHolder.getInstance();
-        loadNFLTeams(inflater, view, container, teamHolder);
+        loadNFLTeams(inflater, view, teamHolder);
 
         return view;
     }
 
-    private void loadNFLTeams(LayoutInflater inflater, View view, ViewGroup container, TeamHolder teamHolder){
+    private void loadNFLTeams(LayoutInflater inflater, View view, TeamHolder teamHolder){
         // Table of NFL teams
         TableRow row = null;
         TableLayout layout = (TableLayout) view.findViewById(R.id.team_list);
@@ -85,7 +85,7 @@ public class NFLFragment extends Fragment {
             circ.setLayoutParams(params);
             circ.setImageBitmap(circleBitmap);
 
-            ScheduleOnClick clickListener = new ScheduleOnClick(inflater, view, container);
+            ScheduleOnClick clickListener = new ScheduleOnClick(inflater, view, team);
 
             circ.setOnClickListener(clickListener);
 

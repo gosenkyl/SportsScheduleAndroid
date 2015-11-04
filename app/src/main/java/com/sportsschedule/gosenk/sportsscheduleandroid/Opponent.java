@@ -5,10 +5,19 @@ package com.sportsschedule.gosenk.sportsscheduleandroid;
  */
 public class Opponent {
 
+    private String eid;
     private String day;
     private String time;
     private String city;
     private String mascot;
+
+    public String getEid() {
+        return eid;
+    }
+
+    public void setEid(String eid) {
+        this.eid = eid;
+    }
 
     public String getDay() {
         return day;

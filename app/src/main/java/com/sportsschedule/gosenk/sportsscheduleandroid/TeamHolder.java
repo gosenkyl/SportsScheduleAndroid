@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -72,11 +73,36 @@ public class TeamHolder {
                     team.setLogoURL(obj.getString("logoURL"));
                     team.setTeamAbbr(obj.getString("teamAbbr"));
 
+                    JSONArray schedList = obj.getJSONArray("scheduleList");
+
+                    List<Opponent> oppList = new ArrayList<Opponent>();
+                    for(int i=0; i<schedList.length(); i++){
+                        JSONObject sched = (JSONObject) schedList.get(i);
+
+                        Opponent opp = new Opponent();
+                        String eid = sched.getString("eid");
+
+                        String day = "BYE";
+                        if(!eid.equals("BYE")) {
+                            day = eid.substring(0, 8);
+                        }
+
+                        opp.setEid(eid);
+                        opp.setCity(sched.getString("city"));
+                        opp.setMascot(sched.getString("mascot"));
+                        opp.setDay(day);
+                        opp.setTime(sched.getString("time"));
+
+                        oppList.add(opp);
+                    }
+
+                    team.setScheduleList(oppList);
+
                     nflTeamList.add(team);
                 }
             }
         } catch(Exception e){
-            e.printStackTrace();;
+            e.printStackTrace();
         }
     }
 
