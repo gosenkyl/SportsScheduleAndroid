@@ -1,9 +1,11 @@
 package com.sportsschedule.gosenk.sportsscheduleandroid.teams;
 
+import java.io.Serializable;
+
 /**
  * Created by Desktop on 10/28/2015.
  */
-public class Opponent {
+public class Opponent implements Serializable{
 
     private String eid;
     private String day;

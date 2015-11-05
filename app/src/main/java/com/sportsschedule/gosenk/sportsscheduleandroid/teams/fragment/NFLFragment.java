@@ -1,5 +1,6 @@
 package com.sportsschedule.gosenk.sportsscheduleandroid.teams.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -13,22 +14,17 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
-import com.sportsschedule.gosenk.sportsscheduleandroid.teams.ScheduleOnClick;
+import com.sportsschedule.gosenk.sportsscheduleandroid.schedule.ScheduleActivity;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHolder;
 
-/**
- * Created by GosenK on 10/30/2015.
- */
 public class NFLFragment extends Fragment {
 
     private static final int COLUMNS = 3;
@@ -48,7 +44,6 @@ public class NFLFragment extends Fragment {
         return nflView;
     }
 
-
     private void loadNFLTeams(LayoutInflater inflater, View view, TeamHolder teamHolder){
         // Table of NFL teams
         TableRow row = null;
@@ -56,7 +51,7 @@ public class NFLFragment extends Fragment {
 
         int i = 0;
         int colCount = 0;
-        for(Team team : teamHolder.getNflTeamList()){
+        for(final Team team : teamHolder.getNflTeamList()){
             if(i % 3 == 0){
                 colCount = 0;
                 row = new TableRow(view.getContext());
@@ -77,7 +72,6 @@ public class NFLFragment extends Fragment {
             Bitmap bMap = BitmapFactory.decodeResource(getResources(), imageResource);
             Bitmap bMapScaled = Bitmap.createScaledBitmap(bMap, (int) (bMap.getWidth() * 0.5), (int) (bMap.getHeight() * 0.5), true);
 
-
             // Circle?
             Bitmap circleBitmap = Bitmap.createBitmap(bMapScaled.getWidth(), bMapScaled.getHeight(), Bitmap.Config.ARGB_8888);
 
@@ -95,9 +89,16 @@ public class NFLFragment extends Fragment {
             circ.setLayoutParams(params);
             circ.setImageBitmap(circleBitmap);
 
-            ScheduleOnClick clickListener = new ScheduleOnClick(inflater, view, team);
+            circ.setOnClickListener(new View.OnClickListener(){
 
-            circ.setOnClickListener(clickListener);
+                @Override
+                public void onClick(View v){
+                    Intent scheduleIntent = new Intent(v.getContext(), ScheduleActivity.class);
+                    scheduleIntent.putExtra("team", team);
+                    startActivity(scheduleIntent);
+                }
+
+            });
 
             linear.addView(circ);
 

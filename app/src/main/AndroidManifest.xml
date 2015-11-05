@@ -10,10 +10,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".splash.SplashActivity"
+
+        <activity
+            android:name=".splash.SplashActivity"
             android:noHistory="true"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +25,11 @@
         <activity android:name=".teams.TeamsActivity" >
         </activity>
 
+        <activity
+            android:name=".schedule.ScheduleActivity"
+            android:label="@string/title_activity_schedule"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

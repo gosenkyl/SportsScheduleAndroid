@@ -6,7 +6,7 @@
     android:gravity="center"
     android:id="@+id/schedule_popup">
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -28,11 +28,12 @@
                 />
         </LinearLayout>
 
-        <ListView
-            android:layout_width="wrap_content"
+        <TableLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/schedule_list">
+            android:id="@+id/schedule_table">
 
-        </ListView>
+
+        </TableLayout>-->
 
 </LinearLayout>

@@ -4,9 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-/**
- * Created by GosenK on 10/30/2015.
- */
+
 public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
     private String[] titles = {"NFL", "MLB", "NBA", "NHL"};

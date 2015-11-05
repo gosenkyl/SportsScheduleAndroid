@@ -1,12 +1,13 @@
 package com.sportsschedule.gosenk.sportsscheduleandroid.teams;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Desktop on 10/28/2015.
  */
-public class Team {
+public class Team implements Serializable{
 
     private Integer teamId;
     private String city;
