@@ -15,9 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,6 +31,8 @@ import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Opponent;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -156,10 +161,26 @@ public class ScheduleActivity extends AppCompatActivity {
         @Override
         public void onClick(View view){
 
+            String[] times = {"15 Minutes", "30 Minutes", "1 Hour", "12 Hours"};
+
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(view.getContext());
 
             // set title
             alertBuilder.setTitle(team.getCity() + " " + team.getMascot() + " Alert");
+
+            Spinner sp = new Spinner(getApplicationContext());
+
+            List<String> list = new ArrayList<String>();
+            list.add("15 Minutes");
+            list.add("30 Minutes");
+            list.add("1 Hour");
+            list.add("12 Hours");
+
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sp.setAdapter(dataAdapter);
+
+            alertBuilder.setView(sp);
 
             // set dialog message
             alertBuilder
@@ -167,9 +188,7 @@ public class ScheduleActivity extends AppCompatActivity {
                     .setCancelable(false)
                     .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-
                             // create alert
-
                             dialog.cancel();
                             Toast.makeText(getApplicationContext(), "Alert Created", Toast.LENGTH_LONG).show();
                         }
@@ -182,11 +201,8 @@ public class ScheduleActivity extends AppCompatActivity {
                         }
                     });
 
-            // create alert dialog
-            AlertDialog alertDialog = alertBuilder.create();
-
-            // show it
-            alertDialog.show();
+            // create alert dialog and show it
+            alertBuilder.create().show();
 
         }
 
