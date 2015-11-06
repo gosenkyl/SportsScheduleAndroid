@@ -12,6 +12,10 @@ public class TeamsActivity extends AppCompatActivity {
 
     /* Action Bar
     * http://stackoverflow.com/questions/27726759/actionbar-setnavigationmodeactionbar-navigation-mode-tabs-deprecated
+    *
+    * Icons
+    * https://materialdesignicons.com/
+    *
     * */
 
 

@@ -13,22 +13,43 @@
     tools:showIn="@layout/activity_schedule"
     tools:context="com.sportsschedule.gosenk.sportsscheduleandroid.schedule.ScheduleActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/schedule_header"
-        android:gravity="center"
-        android:textColor="@color/shade5"
-        android:textSize="@dimen/schedule_header"
-        android:textAppearance="@style/font_medium"
-        />
+        android:orientation="horizontal"
+        android:paddingBottom="20dp">
 
-    <TableLayout
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="15dp"
+            android:id="@+id/team_image"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/schedule_header"
+            android:gravity="center"
+            android:textColor="@color/shade5"
+            android:textSize="@dimen/schedule_header"
+            android:textAppearance="@style/font_medium"
+            />
+
+    </LinearLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/schedule_table">
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/schedule_table">
 
 
-    </TableLayout>
+        </TableLayout>
+
+    </ScrollView>
 
 </LinearLayout>
