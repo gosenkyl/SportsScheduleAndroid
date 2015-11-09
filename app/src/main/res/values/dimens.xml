@@ -6,5 +6,7 @@
     <dimen name="schedule_header">24dp</dimen>
     <dimen name="schedule_item">18dp</dimen>
 
+    <dimen name="padding_option_item">7dp</dimen>
+
     <dimen name="fab_margin">16dp</dimen>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/shade4"
+    android:textAppearance="@style/font_normal"
+    android:textSize="@dimen/schedule_item"
+    android:gravity="center"
+    android:paddingTop="@dimen/padding_option_item"
+    android:paddingBottom="@dimen/padding_option_item"
+    android:background="@color/white"
+    />

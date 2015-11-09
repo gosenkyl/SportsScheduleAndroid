@@ -1,7 +1,11 @@
 package com.sportsschedule.gosenk.sportsscheduleandroid.schedule;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -32,6 +36,7 @@ import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ScheduleActivity extends AppCompatActivity {
@@ -161,8 +166,6 @@ public class ScheduleActivity extends AppCompatActivity {
         @Override
         public void onClick(View view){
 
-            String[] times = {"15 Minutes", "30 Minutes", "1 Hour", "12 Hours"};
-
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(view.getContext());
 
             // set title
@@ -176,8 +179,8 @@ public class ScheduleActivity extends AppCompatActivity {
             list.add("1 Hour");
             list.add("12 Hours");
 
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list);
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_option, list);
+            dataAdapter.setDropDownViewResource(R.layout.spinner_option_list);
             sp.setAdapter(dataAdapter);
 
             alertBuilder.setView(sp);
@@ -188,7 +191,17 @@ public class ScheduleActivity extends AppCompatActivity {
                     .setCancelable(false)
                     .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // create alert
+
+                            AlarmManager alarm = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+
+                            // 1 Minute from now
+                            Long time = new GregorianCalendar().getTimeInMillis()+60*1000;
+
+                            Intent intent = new Intent(getApplicationContext(), ScheduleAlarm.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+
+                            alarm.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+
                             dialog.cancel();
                             Toast.makeText(getApplicationContext(), "Alert Created", Toast.LENGTH_LONG).show();
                         }

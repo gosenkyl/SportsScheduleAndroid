@@ -2,7 +2,8 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:textSize="18dip"
-    android:gravity="left"
+    android:textSize="@dimen/schedule_item"
+    android:gravity="center"
     android:textColor="@color/shade4"
+    android:textAppearance="@style/font_normal"
     android:padding="5dip" />
