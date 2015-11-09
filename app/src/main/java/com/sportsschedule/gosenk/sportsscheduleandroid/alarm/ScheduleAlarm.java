@@ -1,16 +1,15 @@
 package com.sportsschedule.gosenk.sportsscheduleandroid.alarm;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-public class ScheduleAlarm extends BroadcastReceiver {
+import com.sportsschedule.gosenk.sportsscheduleandroid.R;
+
+public class ScheduleAlarm extends AppCompatActivity {
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-
-        Toast.makeText(context, "ALARM TEST!!!", Toast.LENGTH_LONG).show();
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_schedule_alarm);
     }
 }

@@ -13,30 +13,26 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
+import com.sportsschedule.gosenk.sportsscheduleandroid.alarm.AlarmReceiver;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Opponent;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Calendar;
 import java.util.List;
 
 public class ScheduleActivity extends AppCompatActivity {
@@ -174,9 +170,11 @@ public class ScheduleActivity extends AppCompatActivity {
             Spinner sp = new Spinner(getApplicationContext());
 
             List<String> list = new ArrayList<String>();
+            list.add("15 Seconds");
+            list.add("1 Minutes");
             list.add("15 Minutes");
             list.add("30 Minutes");
-            list.add("1 Hour");
+            list.add("1 Hours");
             list.add("12 Hours");
 
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_option, list);
@@ -192,22 +190,42 @@ public class ScheduleActivity extends AppCompatActivity {
                     .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
 
-                            AlarmManager alarm = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                            ListView lw = ((AlertDialog)dialog).getListView();
+                            String checkedItem = (String) lw.getAdapter().getItem(lw.getCheckedItemPosition());
 
-                            // 1 Minute from now
-                            Long time = new GregorianCalendar().getTimeInMillis()+60*1000;
+                            String timeArr[] = checkedItem.split(" ");
+                            Integer timeNum = Integer.parseInt(timeArr[0]);
+                            String timeIncrement = timeArr[1];
 
-                            Intent intent = new Intent(getApplicationContext(), ScheduleAlarm.class);
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+                            int secondsToAdd = timeNum;
+                            if("Seconds".equals(timeIncrement)){
+                                secondsToAdd = timeNum;
+                            } else if ("Minutes".equals(timeIncrement)){
+                                secondsToAdd = timeNum * 60;
+                            } else if("Hours".equals(timeIncrement)){
+                                secondsToAdd = timeNum * 60 * 60;
+                            }
 
-                            alarm.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+                            // From NOW instead of game time for now
+                            Calendar cal = Calendar.getInstance();
+                            cal.add(Calendar.SECOND, secondsToAdd);
+
+                            Intent alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                            alarmIntent.putExtra("team", team);
+                            alarmIntent.putExtra("opponent", opponent);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                            AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+
+                            // Create an alarm that calls AlarmReceiver.java at this particular time
+                            alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
                             dialog.cancel();
                             Toast.makeText(getApplicationContext(), "Alert Created", Toast.LENGTH_LONG).show();
                         }
                     })
-                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int id) {
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
                             // if this button is clicked, just close
                             // the dialog box and do nothing
                             dialog.cancel();
