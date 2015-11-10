@@ -29,6 +29,7 @@ import com.sportsschedule.gosenk.sportsscheduleandroid.R;
 import com.sportsschedule.gosenk.sportsscheduleandroid.alarm.AlarmReceiver;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Opponent;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,33 +50,17 @@ public class ScheduleActivity extends AppCompatActivity {
 
         // Header
         TextView scheduleHeader = (TextView) findViewById(R.id.schedule_header);
-        scheduleHeader.setText(team.getCity() + " " + team.getMascot() + " Schedule");
+        scheduleHeader.setText(team.toString() + " Schedule");
 
         // Image
         // Temp, replace with white background, no circle
 
-        String uri = "@drawable/"+team.getLogoURL();
-        int imageResource = getResources().getIdentifier(uri, null, this.getPackageName());
+        Bitmap img = TeamHelper.getTeamLogoCircle(getApplicationContext(), team.getLogoURL(), 0.5f);
 
-        Bitmap bMap = BitmapFactory.decodeResource(getResources(), imageResource);
-        Bitmap bMapScaled = Bitmap.createScaledBitmap(bMap, (int) (bMap.getWidth() * 0.5), (int) (bMap.getHeight() * 0.5), true);
-
-        // Circle?
-        Bitmap circleBitmap = Bitmap.createBitmap(bMapScaled.getWidth(), bMapScaled.getHeight(), Bitmap.Config.ARGB_8888);
-
-        BitmapShader shader = new BitmapShader (bMapScaled,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-
-        Paint paint = new Paint();
-        paint.setShader(shader);
-        paint.setAntiAlias(true);
-        paint.setColor(getResources().getColor(R.color.shade1));
-
-        Canvas c = new Canvas(circleBitmap);
-        c.drawCircle(bMapScaled.getWidth() / 2, bMapScaled.getHeight() / 2, bMapScaled.getWidth() / 2, paint);
 
         ImageView circ = (ImageView) findViewById(R.id.team_image);
         //circ.setLayoutParams(params);
-        circ.setImageBitmap(circleBitmap);
+        circ.setImageBitmap(img);
 
         // Schedule Items
         TableLayout scheduleTable = (TableLayout) findViewById(R.id.schedule_table);
@@ -167,8 +152,9 @@ public class ScheduleActivity extends AppCompatActivity {
             // set title
             alertBuilder.setTitle(team.getCity() + " " + team.getMascot() + " Alert");
 
-            Spinner sp = new Spinner(getApplicationContext());
+            final Spinner sp = new Spinner(getApplicationContext());
 
+            // TODO Determine Increments
             List<String> list = new ArrayList<String>();
             list.add("15 Seconds");
             list.add("1 Minutes");
@@ -190,10 +176,9 @@ public class ScheduleActivity extends AppCompatActivity {
                     .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
 
-                            ListView lw = ((AlertDialog)dialog).getListView();
-                            String checkedItem = (String) lw.getAdapter().getItem(lw.getCheckedItemPosition());
+                            String selectedItem = (String) sp.getAdapter().getItem(sp.getSelectedItemPosition());
 
-                            String timeArr[] = checkedItem.split(" ");
+                            String timeArr[] = selectedItem.split(" ");
                             Integer timeNum = Integer.parseInt(timeArr[0]);
                             String timeIncrement = timeArr[1];
 
@@ -206,6 +191,7 @@ public class ScheduleActivity extends AppCompatActivity {
                                 secondsToAdd = timeNum * 60 * 60;
                             }
 
+                            // TODO Subtract Increment From Date/Time
                             // From NOW instead of game time for now
                             Calendar cal = Calendar.getInstance();
                             cal.add(Calendar.SECOND, secondsToAdd);
@@ -234,6 +220,15 @@ public class ScheduleActivity extends AppCompatActivity {
 
             // create alert dialog and show it
             alertBuilder.create().show();
+
+            /*public void cancelNotification(int notificationId){
+                if (Context.NOTIFICATION_SERVICE!=null) {
+                    String ns = Context.NOTIFICATION_SERVICE;
+                    NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(ns);
+                    nMgr.cancel(notificationId);
+                }
+            }*/
+
 
         }
 

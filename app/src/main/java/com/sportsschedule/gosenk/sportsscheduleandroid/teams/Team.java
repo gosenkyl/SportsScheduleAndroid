@@ -100,4 +100,8 @@ public class Team implements Serializable{
     public void setScheduleList(List<Opponent> scheduleList) {
         this.scheduleList = scheduleList;
     }
+
+    public String toString(){
+        return this.city + " " + this.mascot;
+    }
 }

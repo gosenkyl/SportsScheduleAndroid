@@ -31,8 +31,9 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
-        <activity android:name=".alarm.ScheduleAlarm" />
-
+        <activity
+            android:name=".alarm.ScheduleAlarm"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver android:process=":remote" android:name=".alarm.AlarmReceiver" />
 

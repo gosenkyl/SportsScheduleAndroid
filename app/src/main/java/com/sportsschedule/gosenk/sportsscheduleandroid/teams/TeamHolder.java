@@ -91,6 +91,7 @@ public class TeamHolder {
                         opp.setMascot(sched.getString("mascot"));
                         opp.setDay(day);
                         opp.setTime(sched.getString("time"));
+                        opp.setLogoURL(sched.getString("logoURL"));
 
                         oppList.add(opp);
                     }

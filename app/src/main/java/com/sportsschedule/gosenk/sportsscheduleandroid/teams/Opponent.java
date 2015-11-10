@@ -12,6 +12,7 @@ public class Opponent implements Serializable{
     private String time;
     private String city;
     private String mascot;
+    private String logoURL;
 
     public String getEid() {
         return eid;
@@ -51,5 +52,17 @@ public class Opponent implements Serializable{
 
     public void setMascot(String mascot) {
         this.mascot = mascot;
+    }
+
+    public String getLogoURL() {
+        return logoURL;
+    }
+
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
+    }
+
+    public String toString(){
+        return this.city + " " + this.mascot;
     }
 }
