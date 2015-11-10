@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
 import com.sportsschedule.gosenk.sportsscheduleandroid.schedule.ScheduleActivity;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHolder;
 
 public class NFLFragment extends Fragment {
@@ -66,28 +67,11 @@ public class NFLFragment extends Fragment {
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-            String uri = "@drawable/"+team.getLogoURL();
-            int imageResource = getResources().getIdentifier(uri, null, view.getContext().getPackageName());
-
-            Bitmap bMap = BitmapFactory.decodeResource(getResources(), imageResource);
-            Bitmap bMapScaled = Bitmap.createScaledBitmap(bMap, (int) (bMap.getWidth() * 0.5), (int) (bMap.getHeight() * 0.5), true);
-
-            // Circle?
-            Bitmap circleBitmap = Bitmap.createBitmap(bMapScaled.getWidth(), bMapScaled.getHeight(), Bitmap.Config.ARGB_8888);
-
-            BitmapShader shader = new BitmapShader (bMapScaled,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-
-            Paint paint = new Paint();
-            paint.setShader(shader);
-            paint.setAntiAlias(true);
-            paint.setColor(getResources().getColor(R.color.shade1));
-
-            Canvas c = new Canvas(circleBitmap);
-            c.drawCircle(bMapScaled.getWidth() / 2, bMapScaled.getHeight() / 2, bMapScaled.getWidth() / 2, paint);
+            Bitmap img = TeamHelper.getTeamLogoCircle(getContext(), team.getLogoURL(), 0.5f);
 
             ImageView circ = new ImageView(view.getContext());
             circ.setLayoutParams(params);
-            circ.setImageBitmap(circleBitmap);
+            circ.setImageBitmap(img);
 
             circ.setOnClickListener(new View.OnClickListener(){
 
@@ -102,20 +86,12 @@ public class NFLFragment extends Fragment {
 
             linear.addView(circ);
 
-
-            // NFL Team Image
-            /*ImageView img = new ImageView(view.getContext());
-            img.setLayoutParams(params);
-            img.setImageBitmap(bMapScaled);
-
-            linear.addView(img);*/
-
             // NFL Team Name
             TextView text = new TextView(view.getContext());
             text.setLayoutParams(params);
             text.setText(team.getCity() + " \n " + team.getMascot());
 
-            text.setTextColor(getResources().getColor(R.color.shade4));
+            text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             text.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
             text.setTextAppearance(view.getContext(), R.style.font_thin_bold);
             text.setGravity(Gravity.CENTER);

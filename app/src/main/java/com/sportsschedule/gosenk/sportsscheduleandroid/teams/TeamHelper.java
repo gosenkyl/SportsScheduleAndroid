@@ -28,7 +28,7 @@ public final class TeamHelper {
         Paint paint = new Paint();
         paint.setShader(shader);
         paint.setAntiAlias(true);
-        paint.setColor(context.getResources().getColor(R.color.shade1));
+        paint.setColor(context.getResources().getColor(R.color.colorPrimaryDark));
 
         Canvas c = new Canvas(circleBitmap);
         c.drawCircle(bMapScaled.getWidth() / 2, bMapScaled.getHeight() / 2, bMapScaled.getWidth() / 2, paint);

@@ -98,7 +98,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
             week.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.schedule_item));
             week.setTextAppearance(getApplicationContext(), R.style.font_thin_bold);
-            week.setTextColor(getResources().getColor(R.color.shade3));
+            week.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             week.setLayoutParams(rowParams1);
 
             TextView opponent = new TextView(this);
@@ -114,7 +114,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
             opponent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.schedule_item));
             opponent.setTextAppearance(getApplicationContext(), R.style.font_thin_bold);
-            opponent.setTextColor(getResources().getColor(R.color.shade3));
+            opponent.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             opponent.setLayoutParams(rowParams2);
 
             row.addView(week);

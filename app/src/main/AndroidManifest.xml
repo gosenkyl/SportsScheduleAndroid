@@ -23,17 +23,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".teams.TeamsActivity" />
+        <activity
+            android:name=".teams.TeamsActivity"
+            />
 
         <activity
             android:name=".schedule.ScheduleActivity"
-            android:label="@string/title_activity_schedule"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:label="@string/title_activity_schedule">
         </activity>
 
         <activity
-            android:name=".alarm.ScheduleAlarm"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".alarm.ScheduleAlarm" />
 
         <receiver android:process=":remote" android:name=".alarm.AlarmReceiver" />
 

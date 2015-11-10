@@ -10,7 +10,6 @@ import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Opponent;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
