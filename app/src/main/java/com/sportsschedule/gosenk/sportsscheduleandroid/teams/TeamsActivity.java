@@ -42,6 +42,7 @@ public class TeamsActivity extends AppCompatActivity {
 
     private void setToolBar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.teams_toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
