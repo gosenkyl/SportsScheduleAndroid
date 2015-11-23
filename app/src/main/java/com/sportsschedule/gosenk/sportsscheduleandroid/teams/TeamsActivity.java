@@ -72,7 +72,7 @@ public class TeamsActivity extends AppCompatActivity {
                 break;
         }
 
-        Toast.makeText(getApplicationContext(), "Butotn " + buttonName, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Button " + buttonName, Toast.LENGTH_SHORT).show();
         return true;
     }
 

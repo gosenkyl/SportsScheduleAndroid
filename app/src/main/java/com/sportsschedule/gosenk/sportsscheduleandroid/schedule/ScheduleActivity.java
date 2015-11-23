@@ -14,6 +14,7 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -34,6 +35,7 @@ import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ScheduleActivity extends AppCompatActivity {
@@ -45,6 +47,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat dtSdf = new SimpleDateFormat("MM/dd/yyyy h:mm");
 
         Team team = (Team) getIntent().getSerializableExtra("team");
 
@@ -120,18 +123,56 @@ public class ScheduleActivity extends AppCompatActivity {
             row.addView(week);
             row.addView(opponent);
 
+            // Scheduling an alarm for a bye week doesn't make sense
             if (!opp.getCity().equals("BYE")){
-                ImageView alarm = new ImageView(this);
-                alarm.setImageDrawable(getResources().getDrawable(R.drawable.alarm));
-                alarm.setLayoutParams(rowParams1);
 
-                alarm.setOnClickListener(new ScheduleAlarm(team, opp));
+                // Scheduling an alarm for a game in the past doesn't make sense
+                Date now = new Date();
 
-                row.addView(alarm);
+                Date gameDateTime = new Date();
+
+                try {
+                    gameDateTime = dtSdf.parse(sdf2.format(sdf.parse(opp.getDay())) + " " + getTime(opp.getTime()));
+                    int i = 0;
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+                if(gameDateTime.after(now)) {
+
+                    ImageView alarm = new ImageView(this);
+                    alarm.setImageDrawable(getResources().getDrawable(R.drawable.alarm));
+                    alarm.setLayoutParams(rowParams1);
+
+                    alarm.setOnClickListener(new ScheduleAlarm(team, opp));
+
+                    row.addView(alarm);
+                }
             }
 
         }
 
+    }
+
+    private String getTime(String time){
+        if(TextUtils.isEmpty(time)){
+            return "0:00";
+        }
+
+        try {
+            String[] timeParts = time.split(":");
+            Integer hours = Integer.valueOf(timeParts[0]);
+            // Bad assumption
+            // NFL webservice doesn't give AM/PM. Believe only London games are AM and start at 9:30ish
+            if(hours >=9 && hours < 12){
+                return time;
+            } else {
+                return String.valueOf(hours + 12) + ":" + timeParts[1];
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return "0:00";
+        }
     }
 
     private class ScheduleAlarm implements View.OnClickListener{
