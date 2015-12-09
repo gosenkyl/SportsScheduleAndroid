@@ -38,81 +38,13 @@ public class NFLFragment extends Fragment {
         if(nflView == null) {
             View view = inflater.inflate(R.layout.team_tab, container, false);
             TeamHolder teamHolder = TeamHolder.getInstance();
-            loadNFLTeams(inflater, view, teamHolder);
+            TeamHelper.loadTeams(view, teamHolder.getNflTeamList());
             nflView = view;
+
+            view.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
         }
 
         return nflView;
-    }
-
-    private void loadNFLTeams(LayoutInflater inflater, View view, TeamHolder teamHolder){
-        // Table of NFL teams
-        TableRow row = null;
-        TableLayout layout = (TableLayout) view.findViewById(R.id.team_list);
-
-        int i = 0;
-        int colCount = 0;
-        for(final Team team : teamHolder.getNflTeamList()){
-            if(i % 3 == 0){
-                colCount = 0;
-                row = new TableRow(view.getContext());
-                layout.addView(row);
-            }
-
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT, 1f);
-
-            LinearLayout linear = new LinearLayout(view.getContext());
-            linear.setOrientation(LinearLayout.VERTICAL);
-            linear.setLayoutParams(lp);
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-            Bitmap img = TeamHelper.getTeamLogoCircle(getContext(), team.getLogoURL(), 0.5f);
-
-            ImageView circ = new ImageView(view.getContext());
-            circ.setLayoutParams(params);
-            circ.setImageBitmap(img);
-
-            circ.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v){
-                    Intent scheduleIntent = new Intent(v.getContext(), ScheduleActivity.class);
-                    scheduleIntent.putExtra("team", team);
-                    startActivity(scheduleIntent);
-                }
-
-            });
-
-            linear.addView(circ);
-
-            // NFL Team Name
-            TextView text = new TextView(view.getContext());
-            text.setLayoutParams(params);
-            text.setText(team.getCity() + " \n " + team.getMascot());
-
-            text.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            text.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
-            text.setTextAppearance(view.getContext(), R.style.font_thin_bold);
-            text.setGravity(Gravity.CENTER);
-
-            linear.addView(text);
-
-            row.addView(linear);
-
-            i++;
-            colCount++;
-        }
-
-        for (int j = COLUMNS - colCount; j > 0; j--) {
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT, 1f);
-
-            LinearLayout linear = new LinearLayout(view.getContext());
-            linear.setOrientation(LinearLayout.VERTICAL);
-            linear.setLayoutParams(lp);
-
-            row.addView(linear);
-        }
     }
 
 }

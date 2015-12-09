@@ -13,12 +13,10 @@ import com.sportsschedule.gosenk.sportsscheduleandroid.R;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.IMLBListener;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.MLBAsyncTask;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
 
 import java.util.List;
 
-/**
- * Created by GosenK on 10/30/2015.
- */
 public class MLBFragment extends Fragment implements IMLBListener {
 
     private View mlbView;
@@ -41,15 +39,10 @@ public class MLBFragment extends Fragment implements IMLBListener {
     @Override
     public void onCompleted(List<Team> mlbTeamList){
 
-        TableLayout tableView = (TableLayout) mlbView.findViewById(R.id.team_list);
+        mlbView.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
-        TableRow rowView = new TableRow(mlbView.getContext());
+        TeamHelper.loadTeams(mlbView, mlbTeamList);
 
-        TextView textView = new TextView(mlbView.getContext());
-        textView.setText("MLB TEST");
-
-        rowView.addView(textView);
-        tableView.addView(rowView);
     }
 
 }
