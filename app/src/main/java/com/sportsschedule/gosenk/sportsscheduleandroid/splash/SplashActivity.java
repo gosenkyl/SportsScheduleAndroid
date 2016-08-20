@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHolder;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamsActivity;
 
@@ -17,36 +18,45 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                new LoadTeams().execute();
-            }
-        }, 5000);
-
+        new LoadTeams().execute();
     }
 
     private class LoadTeams extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //Before HTTP Calls
+        }
+
         @Override
         protected String doInBackground(String... params) {
+            boolean loadSuccessful = TeamHolder.initializeTeams();
 
-            TeamHolder teamHolder = TeamHolder.getInstance();
+            System.out.println("Teams Loaded");
+
+            System.out.println("STATUS: " + loadSuccessful);
+
+            for(Team team : TeamHolder.getNflTeamList()){
+                System.out.println(team.getIdentifier());
+            }
 
             return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
             Intent intent = new Intent(getApplicationContext(), TeamsActivity.class);
             startActivity(intent);
-        }
 
-        @Override
-        protected void onPreExecute() {
+            finish();
         }
 
         @Override
         protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
         }
     }
 

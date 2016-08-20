@@ -20,6 +20,8 @@ import android.widget.TextView;
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
 import com.sportsschedule.gosenk.sportsscheduleandroid.schedule.ScheduleActivity;
 
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
+
 import java.util.List;
 
 public final class TeamHelper {
@@ -49,7 +51,7 @@ public final class TeamHelper {
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-            Bitmap img = TeamHelper.getTeamLogoCircle(view.getContext(), team.getLogoURL(), 0.5f);
+            Bitmap img = TeamHelper.getTeamLogoCircle(view.getContext(), team.getId().replace("-", "_").toLowerCase(), 0.5f);
 
             ImageView circ = new ImageView(view.getContext());
             circ.setLayoutParams(params);

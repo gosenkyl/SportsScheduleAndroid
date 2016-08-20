@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.IMLBListener;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.MLBAsyncTask;
-import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
 
 import java.util.List;

@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
+
 public class MLBAsyncTask extends AsyncTask<Void, Void, List<Team>>{
 
     private IMLBListener listener;
@@ -14,10 +16,7 @@ public class MLBAsyncTask extends AsyncTask<Void, Void, List<Team>>{
 
     @Override
     protected List<Team> doInBackground(Void... params){
-
-        TeamHolder teamHolder = TeamHolder.getInstance();
-        List<Team> mlbTeamList = teamHolder.getMlbTeamList();
-
+        List<Team> mlbTeamList = TeamHolder.getMlbTeamList();
         return mlbTeamList;
     }
 

@@ -1,25 +1,102 @@
 package com.sportsschedule.gosenk.sportsscheduleandroid.teams;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
 
 public class TeamHolder {
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
-    private static TeamHolder instance = null;
-    private List<Team> nflTeamList = null;
-    private List<Team> mlbTeamList = null;
+    private static String host = "http://10.0.2.2:8081";
+    private static String namespace = "api";
 
-    private TeamHolder(){
+    private static List<Team> nflTeamList = new ArrayList<>();
+    private static List<Team> mlbTeamList = new ArrayList<>();
+
+    //private static Map<String, Team> nflTeamMap = new HashMap<>();
+    //private static Map<String, Team> mlbTeamMap = new HashMap<>();
+
+    public static List<Team> getNflTeamList() {
+        return nflTeamList;
+    }
+    public static List<Team> getMlbTeamList() {
+        return mlbTeamList;
+    }
+
+    public static boolean initializeTeams(){
+        boolean nflTeamsSuccess = loadNFLTeams();
+        boolean mlbTeamsSuccess = loadMLBTeams();
+
+        return nflTeamsSuccess && mlbTeamsSuccess;
+    }
+
+    private static boolean loadMLBTeams(){
+        return loadTeams(mlbTeamList, "MLB");
+    }
+
+    private static boolean loadNFLTeams(){
+        return loadTeams(nflTeamList, "NFL");
+    }
+
+    private static boolean loadTeams(List<Team> teamList, String leagueId){
+        try{
+            teamList.addAll(getTeams(leagueId));
+        } catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    private static List<Team> getTeams(String leagueId) throws Exception{
+        List<Team> teamList = new ArrayList<>();
+
+        String resource = "leagues";
+        String urlStr = host +"/"+ namespace +"/"+ resource +"/"+ leagueId;
+        URL url = new URL(urlStr);
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        int responseCode = conn.getResponseCode();
+
+        if(responseCode == HttpURLConnection.HTTP_OK) {
+            InputStreamReader in = new InputStreamReader(conn.getInputStream());
+            BufferedReader br = new BufferedReader(in);
+
+            int cp;
+            StringBuilder sb = new StringBuilder();
+            while ((cp = br.read()) != -1) {
+                sb.append((char) cp);
+            }
+            br.close();
+            in.close();
+
+            JSONObject league = new JSONObject(sb.toString());
+            JSONArray teams = league.getJSONArray("teams");
+
+            for(int i=0; i<teams.length(); i++) {
+                JSONObject teamObj = (JSONObject) teams.get(i);
+                Team team = objectMapper.readValue(teamObj.toString(), Team.class);
+                teamList.add(team);
+            }
+        }
+
+        return teamList;
+    }
+
+    /*private TeamHolder(){
         nflTeamList = new ArrayList<Team>();
         loadNFLTeams();
     }
@@ -185,8 +262,6 @@ public class TeamHolder {
         } catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-
+    }*/
 
 }

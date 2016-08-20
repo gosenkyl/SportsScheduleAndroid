@@ -7,11 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Shader;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -19,7 +14,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -28,8 +22,8 @@ import android.widget.Toast;
 
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
 import com.sportsschedule.gosenk.sportsscheduleandroid.alarm.AlarmReceiver;
-import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Opponent;
-import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Game;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
 
 import java.text.SimpleDateFormat;
@@ -40,14 +34,14 @@ import java.util.List;
 
 public class ScheduleActivity extends AppCompatActivity {
 
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    private static final SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd/yyyy");
+    private static final SimpleDateFormat dtSdf = new SimpleDateFormat("MM/dd/yyyy h:mm");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd/yyyy");
-        SimpleDateFormat dtSdf = new SimpleDateFormat("MM/dd/yyyy h:mm");
 
         Team team = (Team) getIntent().getSerializableExtra("team");
 
@@ -58,7 +52,7 @@ public class ScheduleActivity extends AppCompatActivity {
         // Image
         // Temp, replace with white background, no circle
 
-        Bitmap img = TeamHelper.getTeamLogoCircle(getApplicationContext(), team.getLogoURL(), 0.5f);
+        Bitmap img = TeamHelper.getTeamLogoCircle(getApplicationContext(), team.getId().replace("-", "_").toLowerCase(), 0.5f);
 
 
         ImageView circ = (ImageView) findViewById(R.id.team_image);
@@ -81,7 +75,9 @@ public class ScheduleActivity extends AppCompatActivity {
                 TableRow.LayoutParams.WRAP_CONTENT, 2f);
 
 
-        for(Opponent opp : team.getScheduleList()) {
+        for(Game game : team.getSchedule()) {
+            Team opp = game.getOpponentTeam();
+
             TableRow row = new TableRow(this);
             row.setLayoutParams(tableParams);
             row.setPadding(0, 5, 0, 5);
@@ -93,7 +89,7 @@ public class ScheduleActivity extends AppCompatActivity {
             String gameDate = "";
             try {
                 if (!opp.getCity().equals("BYE"))
-                    gameDate = sdf2.format(sdf.parse(opp.getDay()));
+                    gameDate = sdf2.format(game.getTime());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -123,38 +119,25 @@ public class ScheduleActivity extends AppCompatActivity {
             row.addView(week);
             row.addView(opponent);
 
-            // Scheduling an alarm for a bye week doesn't make sense
-            if (!opp.getCity().equals("BYE")){
+            // Scheduling an alarm for a game in the past doesn't make sense
+            Date now = new Date();
 
-                // Scheduling an alarm for a game in the past doesn't make sense
-                Date now = new Date();
+            if (game.getTime().after(now)) {
 
-                Date gameDateTime = new Date();
+                ImageView alarm = new ImageView(this);
+                alarm.setImageDrawable(getResources().getDrawable(R.drawable.alarm));
+                alarm.setLayoutParams(rowParams1);
 
-                try {
-                    gameDateTime = dtSdf.parse(sdf2.format(sdf.parse(opp.getDay())) + " " + getTime(opp.getTime()));
-                    int i = 0;
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
+                alarm.setOnClickListener(new ScheduleAlarm(team, game));
 
-                if(gameDateTime.after(now)) {
-
-                    ImageView alarm = new ImageView(this);
-                    alarm.setImageDrawable(getResources().getDrawable(R.drawable.alarm));
-                    alarm.setLayoutParams(rowParams1);
-
-                    alarm.setOnClickListener(new ScheduleAlarm(team, opp));
-
-                    row.addView(alarm);
-                }
+                row.addView(alarm);
             }
 
         }
 
     }
 
-    private String getTime(String time){
+    /*private String getTime(String time){
         if(TextUtils.isEmpty(time)){
             return "0:00";
         }
@@ -173,16 +156,18 @@ public class ScheduleActivity extends AppCompatActivity {
             e.printStackTrace();
             return "0:00";
         }
-    }
+    }*/
 
     private class ScheduleAlarm implements View.OnClickListener{
 
         private Team team;
-        private Opponent opponent;
+        private Game game;
+        private Team opponent;
 
-        public ScheduleAlarm(Team team, Opponent opponent){
+        public ScheduleAlarm(Team team, Game game){
             this.team = team;
-            this.opponent = opponent;
+            this.game = game;
+            this.opponent = game.getOpponentTeam();
         }
 
         @Override
@@ -239,7 +224,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
                             Intent alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
                             alarmIntent.putExtra("team", team);
-                            alarmIntent.putExtra("opponent", opponent);
+                            alarmIntent.putExtra("game", game);
                             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                             AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);

@@ -7,22 +7,26 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.AudioAttributes;
-import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
-import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Opponent;
-import com.sportsschedule.gosenk.sportsscheduleandroid.teams.Team;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Game;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
+
+import java.text.SimpleDateFormat;
 
 public class AlarmReceiver extends BroadcastReceiver{
+
+    private static final SimpleDateFormat daySdf = new SimpleDateFormat("MM/dd/yyyy");
+    private static final SimpleDateFormat timeSdf = new SimpleDateFormat("h:mm a");
 
     @Override
     public void onReceive(Context context, Intent intent){
 
         Team team = (Team) intent.getSerializableExtra("team");
-        Opponent opponent = (Opponent) intent.getSerializableExtra("opponent");
+        Game game = (Game) intent.getSerializableExtra("game");
+        Team opponent = game.getOpponentTeam();
 
         Intent notificationIntent = new Intent(context, ScheduleAlarm.class);
         notificationIntent.putExtra("team", team);
@@ -33,7 +37,7 @@ public class AlarmReceiver extends BroadcastReceiver{
 
         Notification notification = new Notification.Builder(context)
                 .setContentTitle(team.getCity() + " " + team.getMascot())
-                .setContentText(team.getCity() + " " + team.getMascot() + " vs " + opponent.getCity() + " " + opponent.getMascot() + " " + opponent.getDay() + " " + opponent.getTime())
+                .setContentText(team.getCity() + " " + team.getMascot() + " vs " + opponent.getCity() + " " + opponent.getMascot() + " " + daySdf.format(game.getTime()) + " " + timeSdf.format(game.getTime()))
                 .setSound(soundUri)
                 .setLights(Color.LTGRAY, 1000, 500)
                 .setSmallIcon(R.drawable.ic_controller)
