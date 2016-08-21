@@ -5,7 +5,7 @@ import java.util.Date;
 public class Game extends BaseDto{
 
     private Team team;
-    private Team opponentTeam;
+    private String opponentTeamId;
     private Date time;
     private boolean homeFlag;
 
@@ -17,12 +17,12 @@ public class Game extends BaseDto{
         this.team = team;
     }
 
-    public Team getOpponentTeam() {
-        return opponentTeam;
+    public String getOpponentTeamId() {
+        return opponentTeamId;
     }
 
-    public void setOpponentTeam(Team opponentTeam) {
-        this.opponentTeam = opponentTeam;
+    public void setOpponentTeamId(String opponentTeamId) {
+        this.opponentTeamId = opponentTeamId;
     }
 
     public Date getTime() {

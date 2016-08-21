@@ -13,6 +13,7 @@ import android.net.Uri;
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
 import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Game;
 import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHolder;
 
 import java.text.SimpleDateFormat;
 
@@ -26,7 +27,7 @@ public class AlarmReceiver extends BroadcastReceiver{
 
         Team team = (Team) intent.getSerializableExtra("team");
         Game game = (Game) intent.getSerializableExtra("game");
-        Team opponent = game.getOpponentTeam();
+        Team opponent = TeamHolder.getTeamMap().get(game.getOpponentTeamId());
 
         Intent notificationIntent = new Intent(context, ScheduleAlarm.class);
         notificationIntent.putExtra("team", team);

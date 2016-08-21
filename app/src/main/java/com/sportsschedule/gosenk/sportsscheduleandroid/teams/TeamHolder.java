@@ -8,11 +8,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Game;
 import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
 
 public class TeamHolder {
@@ -24,14 +26,17 @@ public class TeamHolder {
     private static List<Team> nflTeamList = new ArrayList<>();
     private static List<Team> mlbTeamList = new ArrayList<>();
 
-    //private static Map<String, Team> nflTeamMap = new HashMap<>();
-    //private static Map<String, Team> mlbTeamMap = new HashMap<>();
+    private static Map<String, Team> teamMap = new HashMap<>();
 
     public static List<Team> getNflTeamList() {
         return nflTeamList;
     }
     public static List<Team> getMlbTeamList() {
         return mlbTeamList;
+    }
+
+    public static Map<String, Team> getTeamMap() {
+        return teamMap;
     }
 
     public static boolean initializeTeams(){
@@ -89,9 +94,13 @@ public class TeamHolder {
             for(int i=0; i<teams.length(); i++) {
                 JSONObject teamObj = (JSONObject) teams.get(i);
                 Team team = objectMapper.readValue(teamObj.toString(), Team.class);
+
                 teamList.add(team);
+                teamMap.put(team.getId(), team);
             }
         }
+
+        Collections.sort(teamList);
 
         return teamList;
     }

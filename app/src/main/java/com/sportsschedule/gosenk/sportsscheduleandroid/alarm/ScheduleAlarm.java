@@ -9,6 +9,7 @@ import com.sportsschedule.gosenk.sportsscheduleandroid.R;
 import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Game;
 import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHolder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +29,7 @@ public class ScheduleAlarm extends AppCompatActivity {
 
         Team team = (Team) getIntent().getSerializableExtra("team");
         Game game = (Game) getIntent().getSerializableExtra("game");
-        Team opponent = game.getOpponentTeam();
+        Team opponent = TeamHolder.getTeamMap().get(game.getOpponentTeamId());
 
         ImageView teamAImg = (ImageView) findViewById(R.id.team_a_src);
         teamAImg.setImageBitmap(TeamHelper.getTeamLogoCircle(getApplicationContext(), team.getId().replace("-", "_").toLowerCase(), .75f));

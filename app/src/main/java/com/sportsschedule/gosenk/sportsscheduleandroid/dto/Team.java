@@ -3,7 +3,7 @@ package com.sportsschedule.gosenk.sportsscheduleandroid.dto;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Team extends BaseDto{
+public class Team extends BaseDto implements Comparable<Team>{
 
     private String identifier;
     private League league;
@@ -12,7 +12,7 @@ public class Team extends BaseDto{
     private String primaryColor;
     private String secondaryColor;
 
-    private Set<Game> schedule = new HashSet<>();
+    private Set<Game> schedule = new HashSet<>(0);
 
     public String getIdentifier() {
         return identifier;
@@ -68,5 +68,15 @@ public class Team extends BaseDto{
 
     public void setSchedule(Set<Game> schedule) {
         this.schedule = schedule;
+    }
+
+    @Override
+    public String toString(){
+        return this.getCity() + " " + this.getMascot();
+    }
+
+    @Override
+    public int compareTo(Team another) {
+        return (this.getCity() + " " + this.getMascot()).compareTo(another.getCity() + " " + another.getMascot());
     }
 }

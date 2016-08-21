@@ -53,11 +53,11 @@ public final class TeamHelper {
 
             Bitmap img = TeamHelper.getTeamLogoCircle(view.getContext(), team.getId().replace("-", "_").toLowerCase(), 0.5f);
 
-            ImageView circ = new ImageView(view.getContext());
-            circ.setLayoutParams(params);
-            circ.setImageBitmap(img);
+            ImageView circle = new ImageView(view.getContext());
+            circle.setLayoutParams(params);
+            circle.setImageBitmap(img);
 
-            circ.setOnClickListener(new View.OnClickListener(){
+            circle.setOnClickListener(new View.OnClickListener(){
 
                 @Override
                 public void onClick(View v){
@@ -68,7 +68,7 @@ public final class TeamHelper {
 
             });
 
-            linear.addView(circ);
+            linear.addView(circle);
 
             // NFL Team Name
             TextView text = new TextView(view.getContext());
