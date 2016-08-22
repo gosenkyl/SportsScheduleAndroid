@@ -5,14 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.IMLBListener;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.MLBAsyncTask;
-import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
 
 import java.util.List;
@@ -41,7 +38,7 @@ public class MLBFragment extends Fragment implements IMLBListener {
 
         mlbView.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
-        TeamHelper.loadTeams(mlbView, mlbTeamList);
+        TeamHelper.displayTeams(mlbView, mlbTeamList);
 
     }
 

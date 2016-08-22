@@ -7,9 +7,9 @@
     <dimen name="toolbar_vertical_margin">16dp</dimen>
     <dimen name="nav_drawer_width">260dp</dimen>
 
-
     <dimen name="schedule_header">24dp</dimen>
-    <dimen name="schedule_item">18dp</dimen>
+    <dimen name="schedule_item">16dp</dimen>
+    <dimen name="schedule_time">12dp</dimen>
 
     <dimen name="schedule_item_large">32dp</dimen>
 

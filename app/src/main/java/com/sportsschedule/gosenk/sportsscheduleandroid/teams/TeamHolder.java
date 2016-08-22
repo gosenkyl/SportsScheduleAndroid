@@ -46,11 +46,11 @@ public class TeamHolder {
         return nflTeamsSuccess && mlbTeamsSuccess;
     }
 
-    private static boolean loadMLBTeams(){
+    public static boolean loadMLBTeams(){
         return loadTeams(mlbTeamList, "MLB");
     }
 
-    private static boolean loadNFLTeams(){
+    public static boolean loadNFLTeams(){
         return loadTeams(nflTeamList, "NFL");
     }
 
@@ -100,7 +100,7 @@ public class TeamHolder {
             }
         }
 
-        Collections.sort(teamList);
+        //Collections.sort(teamList);
 
         return teamList;
     }

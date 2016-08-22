@@ -28,7 +28,7 @@ public final class TeamHelper {
 
     private static final int COLUMNS = 3;
 
-    public static void loadTeams(View view, List<Team> teamList){
+    public static void displayTeams(View view, List<Team> teamList){
 
         // Table of teams
         TableRow row = null;

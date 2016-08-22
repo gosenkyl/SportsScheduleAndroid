@@ -53,9 +53,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         // Image
         // Temp, replace with white background, no circle
-
         Bitmap img = TeamHelper.getTeamLogoCircle(getApplicationContext(), team.getId().replace("-", "_").toLowerCase(), 0.5f);
-
 
         ImageView circle = (ImageView) findViewById(R.id.team_image);
         //circ.setLayoutParams(params);
@@ -80,63 +78,70 @@ public class ScheduleActivity extends AppCompatActivity {
             for (Game game : team.getSchedule()) {
                 Team opp = TeamHolder.getTeamMap().get(game.getOpponentTeamId());
 
+                // Create a new row in the table
                 TableRow row = new TableRow(this);
                 row.setLayoutParams(tableParams);
                 row.setPadding(0, 5, 0, 5);
 
                 scheduleTable.addView(row);
 
-                TextView week = new TextView(this);
+                // Game Date Time (08/21/16 12:00 PM)
+                TextView gameDateTime = new TextView(this);
 
                 String gameDate = "";
                 String gameTime = "";
                 try {
-                    //if (!opp.getCity().equals("BYE"))
                     gameDate = dtSdf.format(game.getTime());
                     gameTime = timeSdf.format(game.getTime());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                week.setText(gameDate + "\n" + gameTime);
 
-                week.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.schedule_item));
-                week.setTextAppearance(getApplicationContext(), R.style.font_thin_bold);
-                week.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                week.setLayoutParams(rowParams1);
+                gameDateTime.setText(gameDate + "\n" + gameTime);
 
+                gameDateTime.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.schedule_time));
+                gameDateTime.setTextAppearance(getApplicationContext(), R.style.font_thin_bold);
+                gameDateTime.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                gameDateTime.setLayoutParams(rowParams1);
+
+                row.addView(gameDateTime);
+
+                // Opponent Logo
+                Bitmap opponentImg = TeamHelper.getTeamLogoCircle(getApplicationContext(), opp.getId().replace("-", "_").toLowerCase(), 0.25f);
+
+                ImageView oppImgView = new ImageView(this);
+                oppImgView.setImageBitmap(opponentImg);
+
+                row.addView(oppImgView);
+
+                // Opponent Text
                 TextView opponent = new TextView(this);
 
-                String vs;
-                //if (!opp.getCity().equals("BYE")) {
-                vs = opp.getCity() + " " + opp.getMascot();
-                //} else {
-                //    vs = "Bye";
-                //}
-
+                String vs = opp.getCity() + " " + opp.getMascot();
                 opponent.setText(vs);
 
                 opponent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.schedule_item));
+                opponent.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 opponent.setTextAppearance(getApplicationContext(), R.style.font_thin_bold);
                 opponent.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 opponent.setLayoutParams(rowParams2);
 
-                row.addView(week);
                 row.addView(opponent);
 
                 // Scheduling an alarm for a game in the past doesn't make sense
+                // Should we even show the games in the past? No scores... so why show it?
                 Date now = new Date();
 
+                ImageView alarm = new ImageView(this);
+                alarm.setLayoutParams(rowParams1);
+
                 if (game.getTime().after(now)) {
-
-                    ImageView alarm = new ImageView(this);
                     alarm.setImageDrawable(getResources().getDrawable(R.drawable.alarm));
-                    alarm.setLayoutParams(rowParams1);
-
                     alarm.setOnClickListener(new ScheduleAlarm(team, game));
 
-                    row.addView(alarm);
                 }
 
+                row.addView(alarm);
             }
         }
     }

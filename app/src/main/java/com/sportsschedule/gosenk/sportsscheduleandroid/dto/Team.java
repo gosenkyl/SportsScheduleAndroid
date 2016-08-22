@@ -1,9 +1,9 @@
 package com.sportsschedule.gosenk.sportsscheduleandroid.dto;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Team extends BaseDto implements Comparable<Team>{
+public class Team extends BaseDto /*implements Comparable<Team>*/{
 
     private String identifier;
     private League league;
@@ -12,7 +12,7 @@ public class Team extends BaseDto implements Comparable<Team>{
     private String primaryColor;
     private String secondaryColor;
 
-    private Set<Game> schedule = new HashSet<>(0);
+    private List<Game> schedule = new ArrayList<>();
 
     public String getIdentifier() {
         return identifier;
@@ -62,11 +62,11 @@ public class Team extends BaseDto implements Comparable<Team>{
         this.secondaryColor = secondaryColor;
     }
 
-    public Set<Game> getSchedule() {
+    public List<Game> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Set<Game> schedule) {
+    public void setSchedule(List<Game> schedule) {
         this.schedule = schedule;
     }
 
@@ -75,8 +75,8 @@ public class Team extends BaseDto implements Comparable<Team>{
         return this.getCity() + " " + this.getMascot();
     }
 
-    @Override
+    /*@Override
     public int compareTo(Team another) {
         return (this.getCity() + " " + this.getMascot()).compareTo(another.getCity() + " " + another.getMascot());
-    }
+    }*/
 }

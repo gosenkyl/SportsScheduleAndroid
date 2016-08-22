@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sportsschedule.gosenk.sportsscheduleandroid.R;
+import com.sportsschedule.gosenk.sportsscheduleandroid.dto.Team;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.INFLListener;
+import com.sportsschedule.gosenk.sportsscheduleandroid.teams.NFLAsyncTask;
 import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHelper;
-import com.sportsschedule.gosenk.sportsscheduleandroid.teams.TeamHolder;
 
-public class NFLFragment extends Fragment {
+import java.util.List;
 
-    private static final int COLUMNS = 3;
+public class NFLFragment extends Fragment implements INFLListener {
 
     private View nflView;
 
@@ -21,13 +23,23 @@ public class NFLFragment extends Fragment {
 
         if(nflView == null) {
             View view = inflater.inflate(R.layout.team_tab, container, false);
-            TeamHelper.loadTeams(view, TeamHolder.getNflTeamList());
-            nflView = view;
 
-            view.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            NFLAsyncTask task = new NFLAsyncTask(this);
+            task.execute();
+
+            nflView = view;
         }
 
         return nflView;
+    }
+
+    @Override
+    public void onCompleted(List<Team> nflTeamList){
+
+        nflView.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+
+        TeamHelper.displayTeams(nflView, nflTeamList);
+
     }
 
 }

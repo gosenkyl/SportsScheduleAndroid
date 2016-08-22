@@ -16,6 +16,7 @@ public class MLBAsyncTask extends AsyncTask<Void, Void, List<Team>>{
 
     @Override
     protected List<Team> doInBackground(Void... params){
+        boolean success = TeamHolder.loadMLBTeams();
         List<Team> mlbTeamList = TeamHolder.getMlbTeamList();
         return mlbTeamList;
     }
